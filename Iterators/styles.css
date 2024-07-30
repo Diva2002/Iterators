@@ -1,0 +1,259 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header styles */
+header {
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 35px 0;
+    position: relative;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+
+.logo p {
+    font-size: 0.9rem;
+    color: #777;
+    margin: 0;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    padding: 10px 0;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #007bff;
+}
+
+/* Auth styles for sign up / login button */
+.auth a {
+    text-decoration: none;
+    color: #007bff;
+    padding: 10px 20px;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.auth a:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Mobile menu styles */
+.menu-toggle {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        display: none;
+        width: 100%;
+    }
+
+    nav ul.active {
+        display: flex;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+}
+
+/* Hero section styles */
+.hero {
+    background-image: url('/images/bg.jpeg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 225px 20px;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.hero-buttons .btn {
+    text-decoration: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    display: inline-block;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.hero-buttons .primary {
+    background-color: #ff6600;
+    color: white;
+}
+
+.hero-buttons .primary:hover {
+    background-color: #e55c00;
+}
+
+.hero-buttons .secondary {
+    background-color: white;
+    color: #ff6600;
+    border: 2px solid #ff6600;
+}
+
+.hero-buttons .secondary:hover {
+    background-color: #ff6600;
+    color: white;
+}
+
+/* News and Reviews section styles */
+.news-and-reviews {
+    padding: 50px 0;
+    background-color: #f9f9f9;
+}
+
+.news-and-reviews .container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.news, .reviews {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.news-container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.news-item {
+    flex: 1;
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.news-item img{
+   width: 60%;
+   height: auto;
+   border-radius: 5px;
+   margin-bottom: 10px;
+}
+
+.news-item img{
+    width: 50%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    object-fit: cover;
+}
+
+.news-item p {
+    margin: 0 0 10px 0;
+}
+
+.news-item a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.news-item a:hover {
+    color: #0056b3;
+}
+
+.review-item {
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.review-item p {
+    margin: 0 0 10px 0;
+}
+
+/* Contact section styles */
+.contact-us {
+    padding: 50px 0;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.contact-us h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.contact-us p {
+    font-size: 1rem;
+    margin: 5px 0;
+}
+
+.contact-us a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.contact-us a:hover {
+    color: #0056b3;
+}
+
+/* Footer styles */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
