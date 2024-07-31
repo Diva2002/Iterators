@@ -79,15 +79,6 @@ function displayNews(articles) {
     });
 }
 
-document.getElementById('fetchRatios').addEventListener('click', function() {
-    const symbol = document.getElementById('symbol').value;
-    fetch(`/api/ratios?symbol=${symbol}`)
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('ratiosOutput').innerText = JSON.stringify(data, null, 2);
-        })
-        .catch(error => console.error('Error fetching data:', error));
-});
 
 function searchNews() {
     const query = document.getElementById('newsSearch').value;

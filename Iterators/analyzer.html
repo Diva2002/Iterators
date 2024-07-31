@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Company Analysis</title>
+    <title>Stock Analyzer</title>
     <style>
         .container {
             max-width: 600px;
@@ -19,28 +19,35 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Company Analysis</h1>
-        <form id="companyForm">
-            <label for="symbol">Enter Company Symbol:</label>
-            <input type="text" id="symbol" name="symbol" required>
-            <button type="submit">Submit</button>
-        </form>
-        <div class="result" id="result"></div>
-    </div>
+    <section class="stock-analyzer">
+        <div class="container">
+            <h2>Stock Analyzer</h2>
+            <label for="symbol">Enter Stock Symbol:</label>
+            <input type="text" id="symbol" placeholder="e.g., AAPL">
+            <button id="fetchRatios">Fetch Ratios</button>
+            <pre id="ratiosOutput"></pre>
+        </div>
+    </section>
+
     <script>
-        document.getElementById('companyForm').addEventListener('submit', async function(event) {
-            event.preventDefault();
-            const symbol = document.getElementById('symbol').value;
-            const response = await fetch('/api/analyze', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ symbol })
-            });
-            const result = await response.json();
-            document.getElementById('result').innerText = JSON.stringify(result, null, 2);
+        document.getElementById('fetchRatios').addEventListener('click', function() {
+            const symbol = document.getElementById('symbol').value.trim();
+            if (!symbol) {
+                alert('Please enter a stock symbol.');
+                return;
+            }
+            fetch(`/api/ratios?symbol=${symbol}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok.');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Data fetched:', data); // Log data to console for debugging
+                    document.getElementById('ratiosOutput').innerText = JSON.stringify(data, null, 2);
+                })
+                .catch(error => console.error('Error fetching data:', error));
         });
     </script>
 </body>
