@@ -20,7 +20,7 @@
                     <li><a href="#pages">Pages</a></li>
                     <li><a href="#features">Features</a></li>
                     <li><a href="#pricing">Pricing</a></li>
-                    <li><a href="#blogs">Blogs</a></li>
+                    <li><a href="#" id="blogsLink">Blogs</a></li>
                     <li><a href="#contact">Contact Us</a></li>
                 </ul>
                 <div class="menu-toggle">☰</div>
@@ -45,18 +45,9 @@
         <div class="container">
             <div class="news">
                 <h2>Latest News</h2>
-                <div class="news-container">
-                    <div class="news-item">
-                        <img src="./images/n1.webp" alt=" news images1" class="nimages">
-                        <p>Stock market today: BSE Sensex, Nifty50 see record closing highs</p>
-                        <a href="./n1_files/usync.html">Read more</a>
-                    </div>
-                    <div class="news-item">
-                        <img src="./images/n2.jpg" alt="news images2" class="nimages">
-                        <p>Crypto stocks jump in the U.S. after Donald Trump's pro-Bitcoin speech</p>
-                        <a href="./n2_files/1c2fd14bf310b6aff649.html">Read more</a>
-                    </div>
-                </div>
+                <input type="text" id="newsSearch" placeholder="Search for news...">
+                <button onclick="searchNews()">Search</button>
+                <div id="newsContainer"></div>
             </div>
             <div class="reviews">
                 <h2>Customer Reviews</h2>
