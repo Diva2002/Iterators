@@ -1,19 +1,19 @@
 // Smooth scrolling for navigation links
-document.querySelectorAll('nav ul li a').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
+// document.querySelectorAll('nav ul li a').forEach(anchor => {
+//     anchor.addEventListener('click', function(e) {
+//         e.preventDefault();
 
-        const targetId = this.getAttribute('href').substring(1);
-        const targetElement = document.getElementById(targetId);
+//         const targetId = this.getAttribute('href').substring(1);
+//         const targetElement = document.getElementById(targetId);
 
-        if (targetElement) {
-            window.scrollTo({
-                top: targetElement.offsetTop,
-                behavior: 'smooth'
-            });
-        }
-    });
-});
+//         if (targetElement) {
+//             window.scrollTo({
+//                 top: targetElement.offsetTop,
+//                 behavior: 'smooth'
+//             });
+//         }
+//     });
+// });
 
 // Toggle mobile menu
 const menuToggle = document.querySelector('.menu-toggle');

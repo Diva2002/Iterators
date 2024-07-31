@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Comparison</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        input {
+            width: 45%;
+            padding: 10px;
+            margin: 10px 2.5%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        .result {
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+        .company {
+            margin-bottom: 20px;
+        }
+        .comparison {
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+        }
+        .description {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Stock Comparison</h1>
+        <input type="text" id="symbol1" placeholder="Enter first stock symbol (e.g., AAPL)">
+        <input type="text" id="symbol2" placeholder="Enter second stock symbol (e.g., MSFT)">
+        <button onclick="compareStocks()">Compare</button>
+        <div id="result" class="result"></div>
+    </div>
+    <script>
+        const FINNHUB_API_KEY = 'cqhq1u1r01qgbqu5tirgcqhq1u1r01qgbqu5tis0';
+
+        async function fetchData(symbol) {
+            const [profileResponse, quoteResponse, metricResponse] = await Promise.all([
+                fetch(`https://finnhub.io/api/v1/stock/profile2?symbol=${symbol}&token=${FINNHUB_API_KEY}`),
+                fetch(`https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${FINNHUB_API_KEY}`),
+                fetch(`https://finnhub.io/api/v1/stock/metric?symbol=${symbol}&metric=all&token=${FINNHUB_API_KEY}`)
+            ]);
+
+            const profileData = await profileResponse.json();
+            const quoteData = await quoteResponse.json();
+            const metricData = await metricResponse.json();
+            return { profileData, quoteData, metricData };
+        }
+
+        async function compareStocks() {
+            const symbol1 = document.getElementById('symbol1').value.toUpperCase();
+            const symbol2 = document.getElementById('symbol2').value.toUpperCase();
+
+            if (!symbol1 || !symbol2) {
+                alert('Please enter both stock symbols.');
+                return;
+            }
+
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = 'Loading...';
+
+            try {
+                const [data1, data2] = await Promise.all([fetchData(symbol1), fetchData(symbol2)]);
+
+                if (!data1.profileData.name || !data2.profileData.name) {
+                    throw new Error('Invalid stock symbol or data not available.');
+                }
+
+                const description1 = generateCompanyDescription(data1.profileData);
+                const description2 = generateCompanyDescription(data2.profileData);
+                const price1 = data1.quoteData.c;
+                const price2 = data2.quoteData.c;
+
+                const comparison = generateComparison(data1.profileData.name, data1.metricData.metric, data2.profileData.name, data2.metricData.metric);
+
+                resultDiv.innerHTML = `
+                    <div class="company">
+                        <h2>${data1.profileData.name} (${symbol1})</h2>
+                        <p><strong>Current Price:</strong> $${price1}</p>
+                        <p><strong>Market Cap:</strong> $${data1.profileData.marketCapitalization} billion</p>
+                        <p><strong>P/E Ratio:</strong> ${data1.metricData.metric.peBasicExclExtraTTM}</p>
+                        <p><strong>52-Week High:</strong> $${data1.metricData.metric['52WeekHigh']}</p>
+                        <p><strong>52-Week Low:</strong> $${data1.metricData.metric['52WeekLow']}</p>
+                        <p><strong>Company Description:</strong> ${description1}</p>
+                    </div>
+                    <div class="company">
+                        <h2>${data2.profileData.name} (${symbol2})</h2>
+                        <p><strong>Current Price:</strong> $${price2}</p>
+                        <p><strong>Market Cap:</strong> $${data2.profileData.marketCapitalization} billion</p>
+                        <p><strong>P/E Ratio:</strong> ${data2.metricData.metric.peBasicExclExtraTTM}</p>
+                        <p><strong>52-Week High:</strong> $${data2.metricData.metric['52WeekHigh']}</p>
+                        <p><strong>52-Week Low:</strong> $${data2.metricData.metric['52WeekLow']}</p>
+                        <p><strong>Company Description:</strong> ${description2}</p>
+                    </div>
+                    <div class="comparison">
+                        ${comparison}
+                    </div>
+                    <div class="description">
+                        <h3>Term Descriptions:</h3>
+                        <p><strong>P/E Ratio:</strong> The Price-to-Earnings ratio is a valuation measure comparing the current share price to the per-share earnings. A higher P/E ratio can indicate that the stock is overvalued or that investors expect high growth rates in the future.</p>
+                        <p><strong>52-Week High/Low:</strong> This represents the highest and lowest price at which the stock has traded over the last 52 weeks. It provides a perspective on the stock's recent performance and volatility.</p>
+                        <p><strong>Market Cap:</strong> Market capitalization is the total market value of a company's outstanding shares of stock. It is calculated by multiplying the current share price by the total number of outstanding shares. It provides a measure of company size.</p>
+                    </div>
+                `;
+
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                resultDiv.innerHTML = 'Error fetching data. Please try again.';
+            }
+        }
+
+        function generateCompanyDescription(data) {
+            return `${data.name} is a company listed on the ${data.exchange}. It operates in the ${data.finnhubIndustry} sector and has a market capitalization of ${data.marketCapitalization} billion. The company has been publicly traded since ${data.ipo}.`;
+        }
+
+        function generateComparison(name1, metric1, name2, metric2) {
+            let betterCompany = '';
+            if (metric1.peBasicExclExtraTTM < metric2.peBasicExclExtraTTM) {
+                betterCompany = name1;
+            } else if (metric1.peBasicExclExtraTTM > metric2.peBasicExclExtraTTM) {
+                betterCompany = name2;
+            } else {
+                betterCompany = 'Both companies have similar P/E ratios';
+            }
+
+            return `
+                <p>${name1} has a P/E ratio of ${metric1.peBasicExclExtraTTM} compared to ${name2}'s P/E ratio of ${metric2.peBasicExclExtraTTM}.</p>
+                <p>${name1}'s 52-week high is $${metric1['52WeekHigh']}, while ${name2}'s 52-week high is $${metric2['52WeekHigh']}.</p>
+                <p>${name1}'s 52-week low is $${metric1['52WeekLow']}, while ${name2}'s 52-week low is $${metric2['52WeekLow']}.</p>
+                <p>Market Cap comparison: ${name1} ($${metric1.marketCapitalization} billion) vs ${name2} ($${metric2.marketCapitalization} billion).</p>
+                <p>Based on the P/E ratio, the better investment could be ${betterCompany}.</p>
+            `;
+        }
+    </script>
+</body>
+</html>
