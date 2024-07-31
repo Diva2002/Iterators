@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Page</title>
+    <link rel="stylesheet" href="styles1.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Figuring Out Finance</h1>
+        </div>
+    </header>
+    <div class="layout">
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    <li><a href="#question1">Question 1</a></li>
+                    <li><a href="#question2">Question 2</a></li>
+                    <li><a href="#question3">Question 3</a></li>
+                    <li><a href="#question4">Question 4</a></li>
+                    <li><a href="#question5">Question 5</a></li>
+                    <li><a href="#question6">Question 6</a></li>
+                    <li><a href="#question7">Question 7</a></li>
+                    <li><a href="#question8">Question 8</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="content">
+            <form id="quizForm">
+                <div class="question" id="question1" data-correct="A">
+                    <h2>Question 1</h2>
+                    <p>What is a stock?</p>
+                    <div><label><input type="radio" name="q1" value="A"> A share in the ownership of a company</label></div>
+                    <div><label><input type="radio" name="q1" value="B"> A type of bond issued by a corporation</label></div>
+                    <div><label><input type="radio" name="q1" value="C"> A savings account in a bank</label></div>
+                    <div><label><input type="radio" name="q1" value="D"> A certificate of deposit</label></div>
+                    <div class="explanation" id="explanation1"></div>
+                </div>
+                <div class="question" id="question2" data-correct="B">
+                    <h2>Question 2</h2>
+                    <p>What does ETF stand for?</p>
+                    <div><label><input type="radio" name="q2" value="A"> Equity Transfer Fund</label></div>
+                    <div><label><input type="radio" name="q2" value="B"> Exchange-Traded Fund</label></div>
+                    <div><label><input type="radio" name="q2" value="C"> Electronic Transfer Fund</label></div>
+                    <div><label><input type="radio" name="q2" value="D"> Equity Tracking Fund</label></div>
+                    <div class="explanation" id="explanation2"></div>
+                </div>
+                <div class="question" id="question3" data-correct="C">
+                    <h2>Question 3</h2>
+                    <p>What is equity?</p>
+                    <div><label><input type="radio" name="q3" value="A"> A type of bond</label></div>
+                    <div><label><input type="radio" name="q3" value="B"> A bank loan</label></div>
+                    <div><label><input type="radio" name="q3" value="C"> Ownership interest in a company</label></div>
+                    <div><label><input type="radio" name="q3" value="D"> A form of debt</label></div>
+                    <div class="explanation" id="explanation3"></div>
+                </div>
+                <div class="question" id="question4" data-correct="B">
+                    <h2>Question 4</h2>
+                    <p>What is a dividend?</p>
+                    <div><label><input type="radio" name="q4" value="A"> The interest paid on a bond</label></div>
+                    <div><label><input type="radio" name="q4" value="B"> A portion of a company's earnings paid to shareholders</label></div>
+                    <div><label><input type="radio" name="q4" value="C"> A fee charged by a brokerage</label></div>
+                    <div><label><input type="radio" name="q4" value="D"> A penalty for early withdrawal of funds</label></div>
+                    <div class="explanation" id="explanation4"></div>
+                </div>
+                <div class="question" id="question5" data-correct="D">
+                    <h2>Question 5</h2>
+                    <p>What is market capitalization?</p>
+                    <div><label><input type="radio" name="q5" value="A"> The total value of a company's debt</label></div>
+                    <div><label><input type="radio" name="q5" value="B"> The total value of a company's assets</label></div>
+                    <div><label><input type="radio" name="q5" value="C"> The total value of a company's revenue</label></div>
+                    <div><label><input type="radio" name="q5" value="D"> The total value of a company's outstanding shares</label></div>
+                    <div class="explanation" id="explanation5"></div>
+                </div>
+                <div class="question" id="question6" data-correct="A">
+                    <h2>Question 6</h2>
+                    <p>What does P/E ratio stand for?</p>
+                    <div><label><input type="radio" name="q6" value="A"> Price-to-Earnings ratio</label></div>
+                    <div><label><input type="radio" name="q6" value="B"> Price-to-Equity ratio</label></div>
+                    <div><label><input type="radio" name="q6" value="C"> Profit-to-Earnings ratio</label></div>
+                    <div><label><input type="radio" name="q6" value="D"> Profit-to-Equity ratio</label></div>
+                    <div class="explanation" id="explanation6"></div>
+                </div>
+                <div class="question" id="question7" data-correct="B">
+                    <h2>Question 7</h2>
+                    <p>What is a bull market?</p>
+                    <div><label><input type="radio" name="q7" value="A"> A market in which prices are falling</label></div>
+                    <div><label><input type="radio" name="q7" value="B"> A market in which prices are rising</label></div>
+                    <div><label><input type="radio" name="q7" value="C"> A market with no significant price movements</label></div>
+                    <div><label><input type="radio" name="q7" value="D"> A market controlled by the government</label></div>
+                    <div class="explanation" id="explanation7"></div>
+                </div>
+                <div class="question" id="question8" data-correct="C">
+                    <h2>Question 8</h2>
+                    <p>What does diversification mean in investing?</p>
+                    <div><label><input type="radio" name="q8" value="A"> Investing all money in one stock</label></div>
+                    <div><label><input type="radio" name="q8" value="B"> Investing only in bonds</label></div>
+                    <div><label><input type="radio" name="q8" value="C"> Spreading investments across different assets</label></div>
+                    <div><label><input type="radio" name="q8" value="D"> Investing only in real estate</label></div>
+                    <div class="explanation" id="explanation8"></div>
+                </div>
+            </form>
+        </main>
+    </div>
+    <script src="script1.js"></script>
+</body>
+</html>
